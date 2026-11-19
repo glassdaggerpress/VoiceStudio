@@ -3469,6 +3469,7 @@
     "categoryUnknown": "الترخيص غير محدد",
     "categoryHint": "استنادًا إلى نص الترخيص المعلن، ولم يتحقق منه VoiceStudio. ليست استشارة قانونية.",
     "reviewed": "تمت المراجعة",
+    "modelLicenceReviewed": "تمت مراجعة ترخيص النموذج المنشور",
     "notReviewed": "لم تتم المراجعة",
     "label": "الترخيص",
     "requiredTitle": "يلزم قبول الترخيص",

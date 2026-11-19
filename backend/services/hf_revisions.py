@@ -55,6 +55,11 @@ def _curated_revisions(config_path: Path = CONFIG_PATH) -> dict[str, str]:
         if record["id"] in pins:
             raise ValueError("Duplicate runtime model identity")
         pins[record["id"]] = revision
+    if os.environ.get("AC_AUDIO_STUDIO") == "1":
+        reviewed = json.loads((config_path.parent / "ac_commercial_models.json").read_text())
+        for row in reviewed["models"]:
+            if row["id"] not in pins:
+                pins[row["id"]] = row["revision"]
     return pins
 
 

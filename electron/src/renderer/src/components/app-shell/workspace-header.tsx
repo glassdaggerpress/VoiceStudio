@@ -40,7 +40,7 @@ export function WorkspaceHeader({ children }: { children: ReactNode }) {
         {children}
       </div>
       <div className="flex shrink-0 items-center gap-0.5">
-        <SupportShortcut />
+        {import.meta.env.VITE_AC_AUDIO_STUDIO !== '1' && <SupportShortcut />}
         <Button
           variant="ghost"
           size="sm"

@@ -2,6 +2,9 @@ import { createRootRoute, createRoute, lazyRouteComponent, redirect } from '@tan
 import { AppShell } from '@/components/app-shell/app-shell';
 import { readLastSettingsRoute } from '@/lib/settings-route';
 import { NotFoundPage } from '@/components/not-found-page';
+import { apiJson } from '@/lib/api/client';
+import { queryClient, queryKeys } from '@/lib/query';
+import { audioWorkspaceModel } from '@/lib/ac-audio-workspace';
 
 const HomePage = lazyRouteComponent(() => import('@/features/home/home-page'), 'HomePage');
 
@@ -54,7 +57,29 @@ const SettingsPage = lazyRouteComponent(
 );
 const ProPage = lazyRouteComponent(() => import('@/features/pro/pro-page'), 'ProPage');
 
-export const rootRoute = createRootRoute({ component: AppShell });
+export const rootRoute = createRootRoute({
+  component: AppShell,
+  beforeLoad: async ({ location }) => {
+    if (import.meta.env.VITE_AC_AUDIO_STUDIO !== '1') return;
+    const allowed = ['/clone', '/design', '/dub', '/personas', '/projects', '/settings'];
+    if (!allowed.some((route) => location.pathname === route || location.pathname.startsWith(route + '/'))) {
+      throw redirect({ to: '/dub' });
+    }
+    if (!['/design', '/clone', '/dub'].includes(location.pathname)) return;
+    try {
+      const state = await apiJson<{ backends: { id: string; active_model_id?: string }[] }>('/engines/tts');
+      const current = state.backends.find((engine) => engine.id === 'mlx-audio')?.active_model_id;
+      if (!current) return;
+      const change = audioWorkspaceModel(location.pathname, current, localStorage.getItem('ac-audio-clone-model'));
+      if (!change) return;
+      if (change.rememberClone) localStorage.setItem('ac-audio-clone-model', change.rememberClone);
+      await apiJson('/engines/select', { method: 'POST', body: JSON.stringify({family:'tts',backend_id:'mlx-audio',model_id:change.model}) });
+      await queryClient.invalidateQueries({queryKey:queryKeys.engines});
+    } catch {
+      // Workspace controls retain their normal offline/engine error state.
+    }
+  },
+});
 
 export const indexRoute = createRoute({
   getParentRoute: () => rootRoute,

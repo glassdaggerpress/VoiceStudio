@@ -3413,6 +3413,7 @@
     "categoryUnknown": "无法识别许可",
     "categoryHint": "依据声明的许可文本，未经 VoiceStudio 核实。不构成法律建议。",
     "reviewed": "已审核",
+    "modelLicenceReviewed": "已审核已发布的模型许可证",
     "notReviewed": "未审核",
     "label": "许可",
     "requiredTitle": "需要接受许可",

@@ -599,6 +599,11 @@ def _segmented_retry_log_phrase(disable: bool, retry: bool) -> str:
 async def install_model(req: InstallModelRequest):
     """Download one HF repo snapshot; progress goes through the shared
     ``/setup/download-stream`` SSE feed."""
+    from core.ac_audio_studio import require_model
+    try:
+        require_model(_hub_repo_of(req.repo_id))
+    except ValueError as exc:
+        raise HTTPException(403, str(exc)) from exc
     # ``req.repo_id`` is the catalogue identity; Hub calls use ``hub_repo``.
     model_spec = next(
         (model for model in KNOWN_MODELS if model_key(model) == req.repo_id),

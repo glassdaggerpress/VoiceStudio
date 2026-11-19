@@ -4736,6 +4736,9 @@ def get_diarization_pipeline(return_error: bool = False):
     a docs deeplink — issue #78.
     """
     global _diar_pipeline
+    from core.ac_audio_studio import enabled
+    if enabled():
+        return (None, DIARIZATION_ERR_MISSING) if return_error else None
     from services.diarization_runtime import SORTFORMER, selected_backend
     if selected_backend() == SORTFORMER:
         try:

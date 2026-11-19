@@ -3417,6 +3417,7 @@
     "categoryUnknown": "Lisensi tidak teridentifikasi",
     "categoryHint": "Berdasarkan teks lisensi yang dinyatakan, tidak diverifikasi oleh VoiceStudio. Bukan nasihat hukum.",
     "reviewed": "Ditinjau",
+    "modelLicenceReviewed": "Lisensi model yang dipublikasikan telah ditinjau",
     "notReviewed": "Belum ditinjau",
     "label": "Lisensi",
     "requiredTitle": "Penerimaan lisensi diperlukan",

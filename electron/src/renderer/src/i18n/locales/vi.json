@@ -3417,6 +3417,7 @@
     "categoryUnknown": "Không xác định được giấy phép",
     "categoryHint": "Dựa trên văn bản giấy phép được công bố, VoiceStudio chưa xác minh. Không phải tư vấn pháp lý.",
     "reviewed": "Đã xem xét",
+    "modelLicenceReviewed": "Đã xem xét giấy phép được công bố của mô hình",
     "notReviewed": "Chưa xem xét",
     "label": "Giấy phép",
     "requiredTitle": "Cần chấp nhận giấy phép",

@@ -710,6 +710,9 @@ def load_align_model(language_code: str, device: str):
     language — WhisperX bundles them for ~20 major languages only — or it
     cannot be loaded on ``device``. The caller then keeps Whisper's own
     (looser) word timestamps, after trying any fallback device."""
+    from core.ac_audio_studio import enabled
+    if enabled():
+        return None
     from core.windows_rocm.pipelines import pipeline_error, prepare_audio_imports
 
     if reason := pipeline_error(device):
@@ -3092,7 +3095,10 @@ def list_backends() -> list[dict]:
     caps = detect_host_caps()
 
     out: list[dict] = []
+    from core.ac_audio_studio import enabled as ac_profile
     for bid, cls in _REGISTRY.items():
+        if ac_profile() and bid != "faster-whisper":
+            continue
         broken = _DEEP_IMPORT_BROKEN.get(bid)
         if broken is not None:
             # Loading this backend already proved a missing transitive module

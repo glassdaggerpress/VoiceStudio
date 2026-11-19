@@ -67,6 +67,13 @@ const laterDestinations: Destination[] = [
   ['/integrations', 'integrationCatalog.title', BlocksIcon],
 ];
 
+if (import.meta.env.VITE_AC_AUDIO_STUDIO === '1') {
+  voiceDestinations.splice(0, voiceDestinations.length, ...voiceDestinations.filter(([to]) => to !== '/gallery'));
+  storyDestinations.length = 0;
+  dubDestinations.splice(0, dubDestinations.length, ...dubDestinations.filter(([to]) => to === '/dub'));
+  laterDestinations.splice(0, laterDestinations.length, ...laterDestinations.filter(([to]) => to === '/projects'));
+}
+
 const itemClass =
   'workspace-nav-item group relative isolate flex h-8 min-w-0 items-center overflow-hidden rounded-md text-[13px] text-sidebar-foreground/80 outline-none transition-[color,background-color,box-shadow,backdrop-filter] duration-150 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-gradient-to-r before:from-white/[0.07] before:via-white/[0.025] before:to-transparent before:opacity-0 before:transition-opacity before:duration-150 hover:bg-sidebar-accent/65 hover:text-sidebar-foreground hover:backdrop-blur-xl hover:shadow-[inset_0_1px_0_rgb(255_255_255/9%),0_6px_18px_rgb(0_0_0/10%)] hover:ring-1 hover:ring-inset hover:ring-sidebar-border/60 hover:before:opacity-100 focus-visible:ring-2 focus-visible:ring-ring';
 const iconClass =
@@ -352,13 +359,13 @@ export function WorkspaceNavigation({ compact = false }: { compact?: boolean }) 
         compact={compact}
         pathname={pathname}
       />
-      <NavigationGroup
+      {storyDestinations.length > 0 && <NavigationGroup
         label="nav.stories"
         icon={AudioLinesIcon}
         children={storyDestinations}
         compact={compact}
         pathname={pathname}
-      />
+      />}
       <NavigationGroup
         label="nav.dub"
         icon={FilmIcon}

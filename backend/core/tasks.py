@@ -154,7 +154,8 @@ class TaskManager:
             diagnostic_epoch = t.get("diagnostic_epoch")
             try:
                 import inspect
-                with diagnostic_reports.grant_scope(diagnostic_epoch):
+                from core.ac_audio_studio import resource_lease
+                with diagnostic_reports.grant_scope(diagnostic_epoch), resource_lease():
                     res = func(*args, **kwargs)
                     if inspect.isasyncgen(res):
                         # Close the stream however the task ends (done, cancelled,

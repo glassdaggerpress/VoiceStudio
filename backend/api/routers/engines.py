@@ -202,8 +202,8 @@ def diarisation_status():
     options = []
     from api.routers.setup.models import KNOWN_MODELS, cache_is_complete, is_cached
     pyannote_repo = "pyannote/speaker-diarization-3.1"
-    spec = next(model for model in KNOWN_MODELS if model["repo_id"] == pyannote_repo)
-    pyannote_installed = is_cached(pyannote_repo) and cache_is_complete(spec)
+    spec = next((model for model in KNOWN_MODELS if model["repo_id"] == pyannote_repo), None)
+    pyannote_installed = spec is not None and is_cached(pyannote_repo) and cache_is_complete(spec)
     pyannote_reason = None if pyannote_installed else "Install the pyannote model bundle"
     options.append({
         "id": PYANNOTE,
@@ -1100,6 +1100,16 @@ def select_engine(req: SelectEngineRequest):
     brick a pipeline by picking an engine that needs a GPU this machine lacks.
     A `cpu_fallback` pick is allowed (it runs, just slower) — only a hard
     `unavailable` is blocked. LLM is never routing-gated (its status is "n/a")."""
+    from core.ac_audio_studio import enabled, require_model
+    if enabled():
+        allowed = {"tts": "mlx-audio", "asr": "faster-whisper"}
+        if req.family in allowed and req.backend_id != allowed[req.family]:
+            raise HTTPException(403, "This engine is not approved for Audio Studio.")
+        if req.model_id and req.family == "tts":
+            try:
+                require_model(tts_backend.MLXAudioBackend.CURATED_MODELS.get(req.model_id, req.model_id))
+            except ValueError as exc:
+                raise HTTPException(403, str(exc)) from exc
     family = _FAMILIES.get(req.family)
     if not family:
         raise HTTPException(400, f"Unknown family: {req.family}. Expected one of tts/asr/llm.")

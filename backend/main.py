@@ -1009,6 +1009,9 @@ async def _deferred_startup(app: FastAPI) -> None:
 
 
 def _reconcile_profile_blocking():
+    from core.ac_audio_studio import enabled
+    if enabled():
+        return {}
     from services.performance_profiles import reconcile_active_profile
 
     return reconcile_active_profile()
@@ -1062,6 +1065,10 @@ async def _await_profile_reconcile(app: FastAPI) -> None:
 
 def _start_tts_preload(app: FastAPI) -> None:
     """Own this boot's TTS warm-up, including its reconciliation dependency."""
+    from core.ac_audio_studio import enabled
+    if enabled():
+        app.state.preload_task = None
+        return
     from core import diagnostic_reports
 
     epoch = diagnostic_reports.inherited_grant()
@@ -2215,6 +2222,8 @@ app.add_middleware(BearerKeyMiddleware)
 # address this backend by an unrecognized host name (DNS rebinding). Just
 # inside CORS so preflights reach CORS and refusals keep their CORS headers.
 from core.browser_guard import BrowserGuardMiddleware
+from core.ac_audio_studio import AudioStudioMiddleware
+app.add_middleware(AudioStudioMiddleware)
 app.add_middleware(BrowserGuardMiddleware, is_public_path=_is_public_path)
 
 app.add_middleware(

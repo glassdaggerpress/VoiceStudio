@@ -202,7 +202,9 @@ export function ModelLicense({
   };
   const category = t(modelLicenseCategoryKey(currentInfo?.license_category));
   const review = t(
-    currentInfo?.review_status === 'cleared' ? 'modelLicense.reviewed' : 'modelLicense.notReviewed',
+    currentInfo?.review_status === 'reviewed_model_licence'
+      ? 'modelLicense.modelLicenceReviewed'
+      : currentInfo?.review_status === 'cleared' ? 'modelLicense.reviewed' : 'modelLicense.notReviewed',
   );
   const summary = `${currentInfo?.license || t('common.unknown')} · ${category} · ${review}`;
   const blockers = [...new Set([...(currentInfo?.blockers ?? []), ...(plan?.blockers ?? [])])];

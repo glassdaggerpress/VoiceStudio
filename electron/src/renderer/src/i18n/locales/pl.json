@@ -3443,6 +3443,7 @@
     "categoryUnknown": "Nie rozpoznano licencji",
     "categoryHint": "Na podstawie zadeklarowanego tekstu licencji, niezweryfikowane przez VoiceStudio. To nie jest porada prawna.",
     "reviewed": "Sprawdzono",
+    "modelLicenceReviewed": "Sprawdzono opublikowaną licencję modelu",
     "notReviewed": "Nie sprawdzono",
     "label": "Licencja",
     "requiredTitle": "Wymagana akceptacja licencji",

@@ -174,7 +174,9 @@ export function LicenceSummary({
             {info?.license || acceptance?.license || t('common.unknown')}
           </p>
           <p className="text-xs text-muted-foreground">
-            {t(reviewed ? 'modelLicense.reviewed' : 'modelLicense.notReviewed')} ·{' '}
+            {t(info?.review_status === 'reviewed_model_licence'
+              ? 'modelLicense.modelLicenceReviewed'
+              : reviewed ? 'modelLicense.reviewed' : 'modelLicense.notReviewed')} ·{' '}
             {t('modelLicense.categoryHint')}
           </p>
         </div>

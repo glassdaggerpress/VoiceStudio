@@ -89,17 +89,17 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
         <WebAuthGate>
-          <NativeDictationSync />
+          {import.meta.env.VITE_AC_AUDIO_STUDIO !== '1' && <NativeDictationSync />}
           <ModelInstallSync />
           <RealtimeEventSync />
           <GenerateBudgetSync />
-          <AnalyticsRuntime />
-          <DiagnosticRuntime />
-          <CloudSyncRuntime />
-          <AnalyticsConsentBanner />
-          <GpuOfferBanner />
+          {import.meta.env.VITE_AC_AUDIO_STUDIO !== '1' && <AnalyticsRuntime />}
+          {import.meta.env.VITE_AC_AUDIO_STUDIO !== '1' && <DiagnosticRuntime />}
+          {import.meta.env.VITE_AC_AUDIO_STUDIO !== '1' && <CloudSyncRuntime />}
+          {import.meta.env.VITE_AC_AUDIO_STUDIO !== '1' && <AnalyticsConsentBanner />}
+          {import.meta.env.VITE_AC_AUDIO_STUDIO !== '1' && <GpuOfferBanner />}
           <GenerationProvider>
-            <FirstSoundHandoff />
+            {import.meta.env.VITE_AC_AUDIO_STUDIO !== '1' && <FirstSoundHandoff />}
             <TooltipProvider>
               <RouterProvider router={router} />
               <ModelLicenceGate />

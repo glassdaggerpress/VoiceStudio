@@ -26,6 +26,13 @@ def _load_models_from_yaml() -> list[dict]:
         with open(_YAML_PATH, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
         models = data.get("models", [])
+        from core.ac_audio_studio import enabled, ALLOWED_MODELS
+        if enabled():
+            models = [m for m in models if m.get("repo_id") in ALLOWED_MODELS]
+            base = next((m for m in models if m.get("repo_id") == "mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit"), None)
+            if base:
+                quality = dict(base, repo_id="mlx-community/Qwen3-TTS-12Hz-1.7B-Base-bf16", label="Qwen3-TTS 1.7B Base bf16 (voice cloning, mlx-audio)", size_gb=4.6)
+                models.append(quality)
         logger.info("Loaded %d models from %s", len(models), _YAML_PATH)
         return models
     except FileNotFoundError:

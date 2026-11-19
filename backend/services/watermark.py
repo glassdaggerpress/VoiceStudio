@@ -389,6 +389,9 @@ def release_idle_models(idle_seconds: float, *, now: Optional[float] = None) -> 
 
 def is_enabled() -> bool:
     """Check if invisible watermarking is enabled in user preferences."""
+    from core.ac_audio_studio import enabled
+    if enabled():
+        return False
     return resolve("watermark.invisible", default=True) is not False
 
 
@@ -408,6 +411,9 @@ def is_visible_audio_enabled() -> bool:
 
 def is_visible_video_enabled() -> bool:
     """Check if video logo overlay is enabled for exports."""
+    from core.ac_audio_studio import enabled
+    if enabled():
+        return False
     return resolve("watermark.visible_video", default=True) is not False
 
 

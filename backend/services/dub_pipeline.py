@@ -1903,6 +1903,9 @@ async def ingest_pipeline(
 
             yield prep_event("demucs_start")
             try:
+                from core.ac_audio_studio import enabled as ac_profile
+                if ac_profile():
+                    raise RuntimeError("Audio Studio replaces the speech track without music isolation; separation weights are not commercially reviewed.")
                 async for evt in _separate_background(
                     job_id, audio_hq_path or audio_path, job_dir, paths=(audio_hq_path, audio_path, job_dir),
                 ):

@@ -3417,6 +3417,7 @@
     "categoryUnknown": "Lisans belirlenemedi",
     "categoryHint": "Beyan edilen lisans metnine dayanır, VoiceStudio tarafından doğrulanmamıştır. Hukuki tavsiye değildir.",
     "reviewed": "İncelendi",
+    "modelLicenceReviewed": "Yayımlanan model lisansı incelendi",
     "notReviewed": "İncelenmedi",
     "label": "Lisans",
     "requiredTitle": "Lisans onayı gerekli",

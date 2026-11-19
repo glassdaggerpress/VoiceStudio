@@ -3417,6 +3417,7 @@
     "categoryUnknown": "Lizenz nicht ermittelt",
     "categoryHint": "Basiert auf dem angegebenen Lizenztext, nicht von VoiceStudio geprüft. Keine Rechtsberatung.",
     "reviewed": "Geprüft",
+    "modelLicenceReviewed": "Veröffentlichte Modelllizenz geprüft",
     "notReviewed": "Nicht geprüft",
     "label": "Lizenz",
     "requiredTitle": "Lizenzannahme erforderlich",

@@ -124,7 +124,8 @@ def load_registry(path: Path = REGISTRY_PATH) -> dict:
         if row.get("data_kind", "production") != "production":
             raise ModelTermsError("registry_invalid")
         seen.add(rid.casefold())
-    return value
+    from core.ac_audio_studio import review_overlay
+    return review_overlay(value)
 
 
 def record_blockers(record: dict) -> list[str]:

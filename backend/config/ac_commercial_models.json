@@ -1,0 +1,145 @@
+{
+  "scope": "Published model licence grants, not clearance of input recordings or every possible output. Preserve copyright, licence and NOTICE files when redistributing models.",
+  "models": [
+    {
+      "id": "mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit",
+      "revision": "50f45ef0047cde7e84c2ef04326acb8ada2436a7",
+      "license": "apache-2.0",
+      "documents": [
+        {
+          "url": "https://huggingface.co/mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit/blob/50f45ef0047cde7e84c2ef04326acb8ada2436a7/README.md",
+          "sha256": "29acd85b1992a608daab6cf532606aef3f28cf6ee836eb039b47a918eed93b37"
+        }
+      ],
+      "reviewed_at": "2026-11-19",
+      "commercial_model_use": "permitted under published licence",
+      "output_restrictions": "no separate noncommercial output restriction found; input voice/recording rights remain separate"
+    },
+    {
+      "id": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-4bit",
+      "revision": "5c390979e4b93af5f2932f90742ca99c7dd04687",
+      "license": "apache-2.0",
+      "documents": [
+        {
+          "url": "https://huggingface.co/mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-4bit/blob/5c390979e4b93af5f2932f90742ca99c7dd04687/README.md",
+          "sha256": "40d213ae6ec58c48d4362a66a8e77bc8518b87acf6cd5e54b4aa2352a588a277"
+        }
+      ],
+      "reviewed_at": "2026-11-19",
+      "commercial_model_use": "permitted under published licence",
+      "output_restrictions": "no separate noncommercial output restriction found; input voice/recording rights remain separate"
+    },
+    {
+      "id": "mlx-community/Qwen3-TTS-12Hz-1.7B-Base-bf16",
+      "revision": "a6eb4f68e4b056f1215157bb696209bc82a6db48",
+      "license": "apache-2.0",
+      "documents": [
+        {
+          "url": "https://huggingface.co/mlx-community/Qwen3-TTS-12Hz-1.7B-Base-bf16/blob/a6eb4f68e4b056f1215157bb696209bc82a6db48/README.md",
+          "sha256": "cf921813a02b37002f73b636991a52d9385bb4a81a9ff2dc61a178d1f6e27587"
+        }
+      ],
+      "reviewed_at": "2026-11-19",
+      "commercial_model_use": "permitted under published licence",
+      "output_restrictions": "no separate noncommercial output restriction found; input voice/recording rights remain separate"
+    },
+    {
+      "id": "Systran/faster-whisper-small",
+      "revision": "536b0662742c02347bc0e980a01041f333bce120",
+      "license": "mit",
+      "documents": [
+        {
+          "url": "https://huggingface.co/Systran/faster-whisper-small/blob/536b0662742c02347bc0e980a01041f333bce120/README.md",
+          "sha256": "329373481008c7c38654aff8ecdcf0163c211557cc7ba8e2ef6f2f84b4f75ec8"
+        }
+      ],
+      "reviewed_at": "2026-11-19",
+      "commercial_model_use": "permitted under published licence",
+      "output_restrictions": "no separate noncommercial output restriction found; input voice/recording rights remain separate"
+    },
+    {
+      "id": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+      "license": "apache-2.0",
+      "documents": [
+        {
+          "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base/blob/5d83992436eae1d760afd27aff78a71d676296fc/README.md",
+          "sha256": "181187b6057906bd960bc7f938d0b7a16652509776a0d52c4885b4ae5ccda0ea"
+        }
+      ],
+      "reviewed_at": "2026-11-19",
+      "commercial_model_use": "permitted under published licence",
+      "output_restrictions": "no separate noncommercial output restriction found; input voice/recording rights remain separate"
+    },
+    {
+      "id": "Qwen/Qwen3-TTS-12Hz-1.7B-Base",
+      "revision": "fd4b254389122332181a7c3db7f27e918eec64e3",
+      "license": "apache-2.0",
+      "documents": [
+        {
+          "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base/blob/fd4b254389122332181a7c3db7f27e918eec64e3/README.md",
+          "sha256": "621b7e88f1867bc03d817176fc1f7f55f4b5a70654b2a07fdcda1e169efb024b"
+        }
+      ],
+      "reviewed_at": "2026-11-19",
+      "commercial_model_use": "permitted under published licence",
+      "output_restrictions": "no separate noncommercial output restriction found; input voice/recording rights remain separate"
+    },
+    {
+      "id": "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",
+      "revision": "5ecdb67327fd37bb2e042aab12ff7391903235d3",
+      "license": "apache-2.0",
+      "documents": [
+        {
+          "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign/blob/5ecdb67327fd37bb2e042aab12ff7391903235d3/README.md",
+          "sha256": "acfaf6c0d433866cb5e2bb73e7915ea3767f5a2e3abca413b485635a2c72b5e6"
+        }
+      ],
+      "reviewed_at": "2026-11-19",
+      "commercial_model_use": "permitted under published licence",
+      "output_restrictions": "no separate noncommercial output restriction found; input voice/recording rights remain separate"
+    },
+    {
+      "id": "Qwen/Qwen3-TTS-Tokenizer-12Hz",
+      "revision": "7dd38ad4e9bad454aae9cd937d0cd577604fe229",
+      "license": "apache-2.0",
+      "documents": [
+        {
+          "url": "https://huggingface.co/Qwen/Qwen3-TTS-Tokenizer-12Hz/blob/7dd38ad4e9bad454aae9cd937d0cd577604fe229/README.md",
+          "sha256": "1d9016fbb07873cd720d008423c3da275eac7a20c3997a525594025608d3e1cf"
+        }
+      ],
+      "reviewed_at": "2026-11-19",
+      "commercial_model_use": "permitted under published licence",
+      "output_restrictions": "no separate noncommercial output restriction found; input voice/recording rights remain separate"
+    },
+    {
+      "id": "openai/whisper-small",
+      "revision": "973afd24965f72e36ca33b3055d56a652f456b4d",
+      "license": "apache-2.0",
+      "documents": [
+        {
+          "url": "https://huggingface.co/openai/whisper-small/blob/973afd24965f72e36ca33b3055d56a652f456b4d/README.md",
+          "sha256": "967fa44eefe5d3436e040b0f171fc54da67aad96923bae10af37dac9be5bb6b0"
+        }
+      ],
+      "reviewed_at": "2026-11-19",
+      "commercial_model_use": "permitted under published licence",
+      "output_restrictions": "no separate noncommercial output restriction found; input voice/recording rights remain separate"
+    }
+  ],
+  "upstream_code_licences": [
+    {
+      "id": "QwenLM/Qwen3-TTS",
+      "revision": "022e286b98fbec7e1e916cb940cdf532cd9f488e",
+      "url": "https://raw.githubusercontent.com/QwenLM/Qwen3-TTS/022e286b98fbec7e1e916cb940cdf532cd9f488e/LICENSE",
+      "sha256": "a44a6081c73ad75f0255bb2bb5cab74ef1829565a895a24e53a4f11290ab7655"
+    },
+    {
+      "id": "openai/whisper",
+      "revision": "86098128c0b4f24f0e2aa2994de830614b474227",
+      "url": "https://raw.githubusercontent.com/openai/whisper/86098128c0b4f24f0e2aa2994de830614b474227/LICENSE",
+      "sha256": "b5d65a59060e68c4ff940e1eddfa6f94b2d68fdf58ed7f4dd57721c997e35e9d"
+    }
+  ]
+}

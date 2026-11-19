@@ -3417,6 +3417,7 @@
     "categoryUnknown": "Licence not identified",
     "categoryHint": "Based on the declared licence text, not verified by VoiceStudio. Not legal advice.",
     "reviewed": "Reviewed",
+    "modelLicenceReviewed": "Published model licence reviewed",
     "notReviewed": "Not reviewed",
     "label": "Licence",
     "requiredTitle": "Licence acceptance needed",

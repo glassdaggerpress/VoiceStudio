@@ -90,6 +90,9 @@ def _refresh_demo_audio(conn):
 
 def seed_sample_project():
     """Create the demo voice profile if no profiles exist yet."""
+    from core.ac_audio_studio import enabled
+    if enabled():
+        return
     conn = get_db()
     try:
         _backfill_demo_metadata(conn)

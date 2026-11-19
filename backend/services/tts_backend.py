@@ -3088,6 +3088,9 @@ class MLXAudioBackend(TTSBackend):
         "voxcpm2":     "mlx-community/VoxCPM2-8bit",
     }
     DEFAULT_MODEL_KEY = "kokoro"
+    if os.environ.get("AC_AUDIO_STUDIO") == "1":
+        CURATED_MODELS["qwen3-tts-quality"] = "mlx-community/Qwen3-TTS-12Hz-1.7B-Base-bf16"
+        DEFAULT_MODEL_KEY = "qwen3-tts-base"
 
     # Languages each curated model is documented to speak, as ISO 639-1 codes.
     # Drives both the language picker and the synthesis guard, so neither can
@@ -3195,7 +3198,8 @@ class MLXAudioBackend(TTSBackend):
                 # not turn that listing into an error that hides the controls
                 # to clear it. _ensure_loaded validates before loading.
                 return local
-        return cls.CURATED_MODELS.get(key, key)
+        from core.ac_audio_studio import require_model
+        return require_model(cls.CURATED_MODELS.get(key, key))
 
     def built_identity(self) -> Optional[str]:
         return self._model_id
@@ -3233,6 +3237,8 @@ class MLXAudioBackend(TTSBackend):
         key = next(
             (key for key, repo in self.CURATED_MODELS.items() if repo == self._model_id), None
         )
+        if key == "qwen3-tts-quality":
+            return "qwen3-tts-base"
         if key or not self._model_id or not os.path.isabs(self._model_id):
             return key
         import json
@@ -4460,7 +4466,10 @@ def list_backends(*, include_hidden: bool = False) -> list[dict]:
     installable = _sidecar_installable_ids()
 
     out: list[dict] = []
+    from core.ac_audio_studio import enabled as ac_profile, VOICE_MODELS
     for bid, cls in _REGISTRY.items():
+        if ac_profile() and bid != "mlx-audio":
+            continue
         if not include_hidden and caps.family == "mps" and bid == "omnivoice-subprocess":
             continue
         cls = _effective_backend_class(bid, cls, caps.family)
@@ -4606,8 +4615,15 @@ def list_backends(*, include_hidden: bool = False) -> list[dict]:
             out[-1]["curated_models"] = [
                 {"key": key, "label": _MLX_AUDIO_MODEL_LABELS.get(key, key), "repo_id": repo_id}
                 for key, repo_id in cls.CURATED_MODELS.items()
+                if not ac_profile() or repo_id in VOICE_MODELS
             ]
             out[-1]["active_model_id"] = active_model
+            if ac_profile():
+                out[-1]["display_name"] = "Qwen3-TTS · Audio Studio"
+                out[-1]["supports_voice_design"] = active_model in {"qwen3-tts", "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-4bit"}
+                out[-1]["supports_cloning"] = not out[-1]["supports_voice_design"]
+                out[-1]["preset_voices"] = []
+                out[-1]["default_voice"] = None
     return out
 
 
@@ -4648,6 +4664,9 @@ def _effective_backend_class(
 
 
 def get_backend_class(backend_id: str) -> type[TTSBackend]:
+    from core.ac_audio_studio import enabled
+    if enabled() and backend_id != "mlx-audio":
+        raise ValueError("Only commercially reviewed MLX-Audio models are available in Audio Studio.")
     if backend_id not in _REGISTRY:
         raise ValueError(f"Unknown TTS backend: {backend_id!r}. Known: {list(_REGISTRY)}")
     return _effective_backend_class(backend_id, _REGISTRY[backend_id])

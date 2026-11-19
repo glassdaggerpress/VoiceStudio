@@ -3419,6 +3419,7 @@
     "categoryUnknown": "Licenza non identificata",
     "categoryHint": "Basato sul testo di licenza dichiarato, non verificato da VoiceStudio. Non costituisce consulenza legale.",
     "reviewed": "Verificato",
+    "modelLicenceReviewed": "Licenza pubblicata del modello verificata",
     "notReviewed": "Non verificato",
     "label": "Licenza",
     "requiredTitle": "Accettazione della licenza necessaria",

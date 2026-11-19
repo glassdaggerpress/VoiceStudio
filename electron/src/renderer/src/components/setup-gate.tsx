@@ -24,6 +24,10 @@ export function SetupGate({ children }: { children: ReactNode }) {
   });
   useEffect(() => {
     if (needed !== null || !status.data) return;
+    if (import.meta.env.VITE_AC_AUDIO_STUDIO === '1' && status.data.models_ready) {
+      setNeeded(false);
+      return;
+    }
     const completed = setupWasCompleted();
     if (!setupInProgress && !completed) {
       // This marker belongs to the Electron shell. A populated shared model

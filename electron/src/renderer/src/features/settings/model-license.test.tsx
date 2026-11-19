@@ -161,6 +161,13 @@ describe('versioned model notices', () => {
       en.modelLicense.shortCommercial,
     ],
     [
+      'commercial',
+      'reviewed_model_licence',
+      en.modelLicense.categoryCommercial,
+      en.modelLicense.modelLicenceReviewed,
+      en.modelLicense.shortCommercial,
+    ],
+    [
       undefined,
       'unreviewed',
       en.modelLicense.categoryUnknown,
