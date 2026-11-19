@@ -63,6 +63,9 @@ The AC service sets one GPU worker, one resident TTS engine, no model preloads,
 a 30-second idle timeout, a 6 GiB MLX allocation ceiling and a 256 MiB MLX cache.
 New work requires 6 GiB of available host memory. These bounds reduce contention;
 other applications can still change system memory availability during a job.
+The shared Audio Studio RAM display refreshes every five seconds. `/ac/status`
+reports exact available bytes, the required minimum and `memory_ready` using the
+same threshold as admission, so a rounded display cannot falsely admit a job.
 
 ## Validation
 

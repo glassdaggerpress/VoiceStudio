@@ -21,6 +21,7 @@ VOICE_MODELS = {
 }
 ASR_MODELS = {"Systran/faster-whisper-small"}
 ALLOWED_MODELS = VOICE_MODELS | ASR_MODELS
+MIN_AVAILABLE_BYTES = 6 * 1024**3
 _owned = contextvars.ContextVar("ac_audio_lease", default=False)
 
 
@@ -92,10 +93,14 @@ def status() -> dict:
             fcntl.flock(probe, fcntl.LOCK_UN)
         except BlockingIOError:
             busy = True
+    available = psutil.virtual_memory().available
     return {
         "profile": "audio-studio",
         "audiobook_active": audiobook_active(),
-        "available_gb": round(psutil.virtual_memory().available / 1024**3, 1),
+        "available_gb": round(available / 1024**3, 1),
+        "available_bytes": available,
+        "required_available_gb": MIN_AVAILABLE_BYTES / 1024**3,
+        "memory_ready": available >= MIN_AVAILABLE_BYTES,
         "single_engine": True,
         "busy": busy,
         "background_separation": False,
@@ -149,7 +154,7 @@ def resource_lease():
         except BlockingIOError:
             raise HTTPException(409, "Another audio job is running. Wait for it to finish.") from None
         try:
-            if psutil.virtual_memory().available < 6 * 1024**3:
+            if psutil.virtual_memory().available < MIN_AVAILABLE_BYTES:
                 raise HTTPException(409, "VoiceStudio needs 6 GB of available memory. Finish another task or close an app, then retry.")
             import mlx.core as mx
             mx.set_memory_limit(6 * 1024**3)

@@ -52,6 +52,16 @@ class AudioStudioPolicyTests(unittest.TestCase):
                     with studio.resource_lease():self.fail('admitted without headroom')
             with path.open('a+') as retry:fcntl.flock(retry,fcntl.LOCK_EX|fcntl.LOCK_NB)
 
+    def test_live_memory_readiness_uses_exact_admission_threshold(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'render.lock'
+            for available,ready in [(studio.MIN_AVAILABLE_BYTES-1,False),(studio.MIN_AVAILABLE_BYTES,True)]:
+                with self.subTest(available=available),patch.dict(os.environ,{'AC_AUDIO_RENDER_LOCK':str(path)}),patch.object(studio,'audiobook_active',return_value=False),patch('psutil.virtual_memory',return_value=SimpleNamespace(available=available)):
+                    health=studio.status()
+                self.assertEqual(health['available_bytes'],available)
+                self.assertEqual(health['required_available_gb'],6)
+                self.assertEqual(health['memory_ready'],ready)
+
     def test_disconnected_client_keeps_lease_until_native_work_finishes(self):
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/'render.lock';lease=path.open('a+')
