@@ -15,7 +15,8 @@ The embedded navigation exposes dubbing, cloning, voice design, saved voices,
 studio projects and settings. The standalone app's audiobook, dictation,
 workflow, batch and marketplace features are excluded. Prepared installations
 enter the workspace directly. Analytics, diagnostic reporting, cloud sync and
-native dictation runtimes are not mounted by this web profile.
+native dictation runtimes are not mounted by this web profile. Its shared status
+controls do not poll the excluded batch and dictation endpoints.
 
 ## Models and commercial use
 

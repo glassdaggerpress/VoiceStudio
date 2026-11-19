@@ -13,7 +13,7 @@ export function useDictationSelection() {
   const status = useBackendStatus();
   return useQuery({
     queryKey: ['sidebar-dictation'],
-    enabled: isBackendReachable(status.stage),
+    enabled: import.meta.env.VITE_AC_AUDIO_STUDIO !== '1' && isBackendReachable(status.stage),
     staleTime: 30_000,
     queryFn: async () => {
       const [prefs, catalogue] = await Promise.all([

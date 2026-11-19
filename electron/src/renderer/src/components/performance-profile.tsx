@@ -58,7 +58,8 @@ export function PerformanceProfile({
   const dictation = useDictationSelection();
   const batch = useQuery({
     queryKey: ['batch-jobs', 'active'],
-    enabled: isBackendReachable(backend.stage),
+    enabled: import.meta.env.VITE_AC_AUDIO_STUDIO !== '1' && isBackendReachable(backend.stage),
+    initialData: import.meta.env.VITE_AC_AUDIO_STUDIO === '1' ? [] : undefined,
     queryFn: ({ signal }) => apiJson<unknown[]>('/batch/jobs?status=active&limit=100', { signal }),
     staleTime: 1_000,
     refetchInterval: (query) => (query.state.data?.length ? 1_000 : 15_000),

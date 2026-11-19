@@ -194,7 +194,8 @@ export function StatusBar({
   });
   const batchJobs = useQuery({
     queryKey: ['batch-jobs', 'active'],
-    enabled: isBackendReachable(status.stage),
+    enabled: import.meta.env.VITE_AC_AUDIO_STUDIO !== '1' && isBackendReachable(status.stage),
+    initialData: import.meta.env.VITE_AC_AUDIO_STUDIO === '1' ? [] : undefined,
     queryFn: ({ signal }) => apiJson<BatchJob[]>('/batch/jobs?status=active&limit=100', { signal }),
     staleTime: 1_000,
     refetchInterval: (query) => batchStatusPollMs(query.state.data?.length ?? 0),
